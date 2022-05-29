@@ -39,9 +39,7 @@ const StyledInput = styled.input`
 `;
 
 const StyledButton = styled.button`
-  width: 150px;
-  height: 2rem;
-  border-radius: 1rem;
+
   border-color: blue;
   cursor: pointer;
 `;
@@ -170,7 +168,6 @@ export function Mail(): ReactElement {
           onChange={handleGreetingChange}
           style={{ fontStyle: greeting ? 'normal' : 'italic' }}
         ></StyledInput>
-        <StyledLabel>Provide email credentials</StyledLabel>
         <StyledButton
           //disabled={!active || !greeterContract ? true : false}
           style={{
@@ -178,8 +175,10 @@ export function Mail(): ReactElement {
             borderColor: !active || !greeterContract ? 'unset' : 'blue'
           }}
           onClick={handleDeployContract}
+          className="btn btn-lg btn-outline-primary m-2"
+
         >
-          Submit
+          Confirm
         </StyledButton>
 
       </StyledGreetingDiv>

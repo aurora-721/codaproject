@@ -39,9 +39,6 @@ const StyledInput = styled.input`
 `;
 
 const StyledButton = styled.button`
-  width: 150px;
-  height: 2rem;
-  border-radius: 1rem;
   border-color: blue;
   cursor: pointer;
 `;
@@ -167,29 +164,7 @@ export function BuyTickets(): ReactElement {
        <p className="lead text-muted">
        Select which ticket and how much BlockSplit tickets you want to buy. To complete click buy button. 
        </p>
-       <p>
-      <StyledGreetingDiv>
-        <StyledLabel htmlFor="greetingInput">Provide email credentials</StyledLabel>
-        <StyledInput
-          id="greetingInput"
-          type="text"
-          placeholder={greeting ? '' : 'Input email'}
-          onChange={handleGreetingChange}
-          style={{ fontStyle: greeting ? 'normal' : 'italic' }}
-        ></StyledInput>
-        <StyledButton
-          //disabled={!active || !greeterContract ? true : false}
-          style={{
-            //cursor: !active || !greeterContract ? 'not-allowed' : 'pointer',
-            borderColor: !active || !greeterContract ? 'unset' : 'blue'
-          }}
-          onClick={handleDeployContract}
-        >
-          Submit
-        </StyledButton>
-      </StyledGreetingDiv>
 
-       </p>
 
         <div className="row" >
         <div className="card col-6" >
@@ -197,9 +172,16 @@ export function BuyTickets(): ReactElement {
                 <h2 className="card-title">VIP tickets</h2>
                 <p className="card-text">Includes everything in the regular ticket, plus invitation to VIP dinner, sailing, private parties, backstage and much more.</p>
                 <h4>$500</h4>
-                <a href="#" className="btn btn-lg btn-outline-primary m-2">
-                    Buy VIP
-                </a>
+                <StyledButton
+                  //disabled={!active || !greeterContract ? true : false}
+                  style={{
+                    //cursor: !active || !greeterContract ? 'not-allowed' : 'pointer',
+                    borderColor: !active || !greeterContract ? 'gray' : 'blue'
+                  }}
+                  className="btn btn-lg btn-outline-primary m-2"
+                >
+                  Buy VIP
+                </StyledButton>
             </div>
         </div>
         <div className="card col-6" >
@@ -207,8 +189,12 @@ export function BuyTickets(): ReactElement {
                 <h2 className="card-title">Regular ticket</h2>
                 <p className="card-text">Attend all the talks, expo, workshops and official parties. Ticket includes food and drinks during the events and a dope swag.</p>
                 <h4>$100</h4>
-                <a href="#" className="btn btn-lg btn-outline-primary m-2">
-                    Buy regular
+                <a
+                  //disabled={!active || !greeterContract ? true : false}
+                  href="/email"
+                  className="btn btn-lg btn-outline-primary m-2"
+                >
+                  Buy Regular
                 </a>
             </div>
         </div>
