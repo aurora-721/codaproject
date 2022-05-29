@@ -11,6 +11,8 @@ import styled from 'styled-components';
 import TicketArtifact from '../artifacts/contracts/TicketNFT.sol/TicketNFT.json';
 import { Provider } from '../utils/provider';
 
+type CleanupFunction = (() => void) | undefined;
+
 const StyledDeployContractButton = styled.button`
   width: 180px;
   height: 2rem;
@@ -44,142 +46,80 @@ const StyledButton = styled.button`
   cursor: pointer;
 `;
 
+
 export function Mail(): ReactElement {
+  const { account } = useWeb3React<Provider>();
+
   const context = useWeb3React<Provider>();
   const { library, active } = context;
 
   const [signer, setSigner] = useState<Signer>();
-  const [greeterContract, setGreeterContract] = useState<Contract>();
-  const [greeterContractAddr, setGreeterContractAddr] = useState<string>('');
   const [greeting, setGreeting] = useState<string>('');
+  const [email, setMail] = useState<string>('');
   const [greetingInput, setGreetingInput] = useState<string>('');
 
-  useEffect((): void => {
-    if (!library) {
-      setSigner(undefined);
-      return;
-    }
+  function handleMailChange(event:any) {
+    setMail(event.target.value);
+  }
+  
 
-    setSigner(library.getSigner());
-  }, [library]);
+  async function handleGreetingSubmit(): Promise<void> {
+    try {
 
-  useEffect((): void => {
-    if (!greeterContract) {
-      return;
-    }
-
-    async function getGreeting(greeterContract: Contract): Promise<void> {
-      const _greeting = await greeterContract.greet();
-
-      if (_greeting !== greeting) {
-        setGreeting(_greeting);
+      let accountStr = '';
+      if (account) {
+        accountStr = account.toString()
       }
-    }
 
-    getGreeting(greeterContract);
-  }, [greeterContract, greeting]);
+      const requestOptions = {
+        method: 'POST',
+        redirect: 'follow'
+      };
 
-  function handleDeployContract(event: MouseEvent<HTMLButtonElement>) {
-    event.preventDefault();
+      const url_to_add = "https://hook.integromat.com/koyie7sp5mdwoep8yw4uy6jrqn2qegwz?mail="+ email.toString() +"&address="+ accountStr;
+      
+      console.log(email);
+      console.log(url_to_add);
+      
+      fetch(url_to_add, requestOptions as any)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
 
-    // only deploy the Greeter contract one time, when a signer is defined
-    if (greeterContract || !signer) {
-      return;
-    }
-
-    async function deployGreeterContract(signer: Signer): Promise<void> {
-      const Greeter = new ethers.ContractFactory(
-        TicketArtifact.abi,
-        TicketArtifact.bytecode,
-        signer
+    //  const newGreeting = await greeterContract.greet();
+    //  window.alert(`Success!\n\nGreeting is now: ${newGreeting}`);
+    /*
+      if (newGreeting !== greeting) {
+        setGreeting(newGreeting);
+      }
+      */
+    } catch (error: any) {
+      window.alert(
+        'Error!' + (error && error.message ? `\n\n${error.message}` : '')
       );
-
-      try {
-        const greeterContract = await Greeter.deploy('Hello, Hardhat!');
-
-        await greeterContract.deployed();
-
-        const greeting = await greeterContract.greet();
-
-        setGreeterContract(greeterContract);
-        setGreeting(greeting);
-
-        window.alert(`Greeter deployed to: ${greeterContract.address}`);
-
-        setGreeterContractAddr(greeterContract.address);
-      } catch (error: any) {
-        window.alert(
-          'Error!' + (error && error.message ? `\n\n${error.message}` : '')
-        );
-      }
     }
-
-    deployGreeterContract(signer);
   }
 
-  function handleGreetingChange(event: ChangeEvent<HTMLInputElement>): void {
-    event.preventDefault();
-    setGreetingInput(event.target.value);
-  }
-
-  function handleGreetingSubmit(event: MouseEvent<HTMLButtonElement>): void {
-    event.preventDefault();
-
-    if (!greeterContract) {
-      window.alert('Undefined greeterContract');
-      return;
-    }
-
-    if (!greetingInput) {
-      window.alert('Greeting cannot be empty');
-      return;
-    }
-
-    async function submitGreeting(greeterContract: Contract): Promise<void> {
-      try {
-        const setGreetingTxn = await greeterContract.setGreeting(greetingInput);
-
-        await setGreetingTxn.wait();
-
-        const newGreeting = await greeterContract.greet();
-        window.alert(`Success!\n\nGreeting is now: ${newGreeting}`);
-
-        if (newGreeting !== greeting) {
-          setGreeting(newGreeting);
-        }
-      } catch (error: any) {
-        window.alert(
-          'Error!' + (error && error.message ? `\n\n${error.message}` : '')
-        );
-      }
-    }
-
-    submitGreeting(greeterContract);
-  }
-
+  
   return (
     <>
       <StyledGreetingDiv>
-        <StyledLabel htmlFor="greetingInput">Provide email credentials</StyledLabel>
-        <StyledInput
-          id="greetingInput"
-          type="text"
-          placeholder={greeting ? '' : 'Input email'}
-          onChange={handleGreetingChange}
-          style={{ fontStyle: greeting ? 'normal' : 'italic' }}
-        ></StyledInput>
-        <StyledButton
-          //disabled={!active || !greeterContract ? true : false}
-          style={{
-            //cursor: !active || !greeterContract ? 'not-allowed' : 'pointer',
-            borderColor: !active || !greeterContract ? 'unset' : 'blue'
-          }}
-          onClick={handleDeployContract}
-          className="btn btn-lg btn-outline-primary m-2"
+          <StyledLabel htmlFor="emailInput">Provide email credentials</StyledLabel>
+          <StyledInput
+            id="emailInput"
+            type="text"
+            placeholder={greeting ? '' : 'Input email'}
+            onChange={handleMailChange}
+            value={email} 
+          ></StyledInput>
+          <StyledButton
+            //disabled={!active || !greeterContract ? true : false}
+            onClick={handleGreetingSubmit}
+            className="btn btn-lg btn-outline-primary m-2"
 
-        >
-          Confirm
-        </StyledButton>
+          >
+            Confirm
+          </StyledButton>
 
       </StyledGreetingDiv>
     </>
