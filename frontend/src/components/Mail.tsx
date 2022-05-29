@@ -79,7 +79,7 @@ export function Mail(): ReactElement {
     getGreeting(greeterContract);
   }, [greeterContract, greeting]);
 
-  function handleDeployContract(event: MouseEvent<HTMLButtonElement>) {
+  function handleBuyTickets(event: MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
 
     // only deploy the Greeter contract one time, when a signer is defined
@@ -87,26 +87,34 @@ export function Mail(): ReactElement {
       return;
     }
 
-    async function deployGreeterContract(signer: Signer): Promise<void> {
-      const Greeter = new ethers.ContractFactory(
+    async function buyTickets(signer: Signer): Promise<void> {
+      const ticketNFTContract = new ethers.Contract(
+        '0xab168244de4dce1482a806ea4b5bb7f790389520',
         TicketArtifact.abi,
-        TicketArtifact.bytecode,
         signer
       );
 
       try {
-        const greeterContract = await Greeter.deploy('Hello, Hardhat!');
+        // const greeterContract = await TicketNFT.deploy('Hello, Hardhat!');
 
-        await greeterContract.deployed();
+        // await greeterContract.deployed();
 
-        const greeting = await greeterContract.greet();
+        // [buyer] = await ethers.getSigners();
 
-        setGreeterContract(greeterContract);
-        setGreeting(greeting);
+        const buyTicket = await ticketNFTContract.connect(signer).reserveTicket({
+          value: 100000000000
+        })//.then(console.log);
+        const tx = await buyTicket.wait();
+        console.log(tx);
 
-        window.alert(`Greeter deployed to: ${greeterContract.address}`);
+        // const greeting = await ticketNFTContract.greet();
 
-        setGreeterContractAddr(greeterContract.address);
+        // setGreeterContract(ticketNFTContract);
+        // setGreeting(greeting);
+
+        // window.alert(`Greeter deployed to: ${ticketNFTContract.address}`);
+
+        setGreeterContractAddr(ticketNFTContract.address);
       } catch (error: any) {
         window.alert(
           'Error!' + (error && error.message ? `\n\n${error.message}` : '')
@@ -114,7 +122,7 @@ export function Mail(): ReactElement {
       }
     }
 
-    deployGreeterContract(signer);
+    buyTickets(signer);
   }
 
   function handleGreetingChange(event: ChangeEvent<HTMLInputElement>): void {
@@ -174,7 +182,7 @@ export function Mail(): ReactElement {
             //cursor: !active || !greeterContract ? 'not-allowed' : 'pointer',
             borderColor: !active || !greeterContract ? 'unset' : 'blue'
           }}
-          onClick={handleDeployContract}
+          onClick={handleBuyTickets}
           className="btn btn-lg btn-outline-primary m-2"
 
         >
