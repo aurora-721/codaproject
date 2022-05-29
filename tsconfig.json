@@ -1,12 +1,22 @@
 {
-  "compilerOptions": {
-    "target": "es2018",
-    "module": "commonjs",
-    "strict": true,
-    "esModuleInterop": true,
-    "outDir": "dist",
-    "declaration": true
-  },
-  "include": ["./tasks", "./test", "./typechain"],
-  "files": ["./hardhat.config.ts"]
+    "compilerOptions": {
+        "declaration": true,
+        "esModuleInterop": true,
+        "module": "commonjs",
+        "outDir": "dist",
+        "strict": true,
+        "target": "es2018",
+        "resolveJsonModule": true,
+    },
+    "exclude": [
+        "actions"
+    ],
+    "files": [
+        "./hardhat.config.ts"
+    ],
+    "include": [
+        "./tasks",
+        "./test",
+        "./typechain"
+    ]
 }
