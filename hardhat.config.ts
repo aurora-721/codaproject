@@ -13,7 +13,7 @@ dotenv.config();
 
 const config: HardhatUserConfig = {
   solidity: '0.8.4',
-  // defaultNetwork: "ropsten",
+  defaultNetwork: "ropsten",
   paths: {
     artifacts: './frontend/src/artifacts'
   },

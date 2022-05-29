@@ -8,7 +8,7 @@ import {
   useState
 } from 'react';
 import styled from 'styled-components';
-import GreeterArtifact from '../artifacts/contracts/Greeter.sol/Greeter.json';
+import TicketArtifact from '../artifacts/contracts/TicketNFT.sol/TicketNFT.json';
 import { Provider } from '../utils/provider';
 
 const StyledDeployContractButton = styled.button`
@@ -91,8 +91,8 @@ export function Mail(): ReactElement {
 
     async function deployGreeterContract(signer: Signer): Promise<void> {
       const Greeter = new ethers.ContractFactory(
-        GreeterArtifact.abi,
-        GreeterArtifact.bytecode,
+        TicketArtifact.abi,
+        TicketArtifact.bytecode,
         signer
       );
 

@@ -8,7 +8,7 @@ import {
   useState
 } from 'react';
 import styled from 'styled-components';
-import GreeterArtifact from '../artifacts/contracts/Greeter.sol/Greeter.json';
+import TicketArtifact from '../artifacts/contracts/TicketNFT.sol/TicketNFT.json';
 import { Provider } from '../utils/provider';
 import { SectionDivider } from './SectionDivider';
 
@@ -92,13 +92,13 @@ export function Greeter(): ReactElement {
 
     async function deployGreeterContract(signer: Signer): Promise<void> {
       const Greeter = new ethers.ContractFactory(
-        GreeterArtifact.abi,
-        GreeterArtifact.bytecode,
+        TicketArtifact.abi,
+        TicketArtifact.bytecode,
         signer
       );
 
       try {
-        const greeterContract = await Greeter.deploy('Hello, Hardhat!');
+        const greeterContract = await Greeter.deploy();
 
         await greeterContract.deployed();
 
