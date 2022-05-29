@@ -5,11 +5,11 @@ import { App } from './App';
 import './index.css';
 import { getProvider } from './utils/provider';
 
-ReactDOM.render(
+const root = ReactDOM.render(
   <React.StrictMode>
     <Web3ReactProvider getLibrary={getProvider}>
       <App />
     </Web3ReactProvider>
   </React.StrictMode>,
   document.getElementById('root')
-);
+);   

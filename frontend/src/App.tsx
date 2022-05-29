@@ -5,7 +5,8 @@ import { Greeter } from './components/Greeter';
 import { SectionDivider } from './components/SectionDivider';
 import { SignMessage } from './components/SignMessage';
 import { WalletStatus } from './components/WalletStatus';
-
+import { Mail } from './components/Mail';
+import { Account } from './components/Account';
 const StyledAppDiv = styled.div`
   display: grid;
   grid-gap: 20px;
@@ -21,6 +22,11 @@ export function App(): ReactElement {
       <SignMessage />
       <SectionDivider />
       <Greeter />
+      <SectionDivider />
+      <Account />
+      <SectionDivider />
+      <Mail />
+
     </StyledAppDiv>
   );
 }
