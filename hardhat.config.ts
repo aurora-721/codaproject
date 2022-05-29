@@ -13,17 +13,17 @@ dotenv.config();
 
 const config: HardhatUserConfig = {
   solidity: '0.8.4',
-  defaultNetwork: "ropsten",
+  // defaultNetwork: "ropsten",
   paths: {
     artifacts: './frontend/src/artifacts'
   },
   networks: {
-    // hardhat: {
-    //   mining: {
-    //     auto: false,
-    //     interval: 1000
-    //   }
-    // },
+    hardhat: {
+      mining: {
+        auto: false,
+        interval: 1000
+      }
+    },
     ropsten: {
       url: process.env.ROPSTEN_URL || '',
       accounts:
