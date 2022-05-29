@@ -16,12 +16,7 @@ export function App(): ReactElement {
   return (
     <StyledAppDiv>
       <ActivateDeactivate />
-      <SectionDivider />
-      <WalletStatus />
-      <SectionDivider />
-      <SignMessage />
-      <SectionDivider />
-      <Greeter />
+
       <SectionDivider />
       <Account />
       <SectionDivider />

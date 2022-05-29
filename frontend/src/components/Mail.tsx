@@ -162,16 +162,7 @@ export function Mail(): ReactElement {
 
   return (
     <>
-      <StyledDeployContractButton
-        disabled={!active || greeterContract ? true : false}
-        style={{
-          cursor: !active || greeterContract ? 'not-allowed' : 'pointer',
-          borderColor: !active || greeterContract ? 'unset' : 'blue'
-        }}
-        onClick={handleDeployContract}
-      >
-        Deploy Greeter Contract
-      </StyledDeployContractButton>
+
       <SectionDivider />
       <StyledGreetingDiv>
         <StyledLabel htmlFor="greetingInput">Provide email credentials</StyledLabel>
@@ -183,12 +174,12 @@ export function Mail(): ReactElement {
           style={{ fontStyle: greeting ? 'normal' : 'italic' }}
         ></StyledInput>
         <StyledButton
-          disabled={!active || !greeterContract ? true : false}
+          //disabled={!active || !greeterContract ? true : false}
           style={{
             cursor: !active || !greeterContract ? 'not-allowed' : 'pointer',
             borderColor: !active || !greeterContract ? 'unset' : 'blue'
           }}
-          onClick={handleGreetingSubmit}
+          onClick={handleDeployContract}
         >
           Submit
         </StyledButton>
