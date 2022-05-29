@@ -46,7 +46,7 @@ const StyledButton = styled.button`
   cursor: pointer;
 `;
 
-export function Mail(): ReactElement {
+export function BuyTickets(): ReactElement {
   const context = useWeb3React<Provider>();
   const { library, active } = context;
 
@@ -161,6 +161,13 @@ export function Mail(): ReactElement {
 
   return (
     <>
+         <section className="jumbotron text-center mb-0 bg-white">
+      <div className="container">
+       <h1 className="jumbotron-heading">Buy ticket for Web3 summit</h1>
+       <p className="lead text-muted">
+       Select which ticket and how much BlockSplit tickets you want to buy. To complete click buy button. 
+       </p>
+       <p>
       <StyledGreetingDiv>
         <StyledLabel htmlFor="greetingInput">Provide email credentials</StyledLabel>
         <StyledInput
@@ -170,7 +177,6 @@ export function Mail(): ReactElement {
           onChange={handleGreetingChange}
           style={{ fontStyle: greeting ? 'normal' : 'italic' }}
         ></StyledInput>
-        <StyledLabel>Provide email credentials</StyledLabel>
         <StyledButton
           //disabled={!active || !greeterContract ? true : false}
           style={{
@@ -181,8 +187,39 @@ export function Mail(): ReactElement {
         >
           Submit
         </StyledButton>
-
       </StyledGreetingDiv>
+
+       </p>
+
+        <div className="row" >
+        <div className="card col-6" >
+            <div className="card-body">
+                <h2 className="card-title">VIP tickets</h2>
+                <p className="card-text">Includes everything in the regular ticket, plus invitation to VIP dinner, sailing, private parties, backstage and much more.</p>
+                <h4>$500</h4>
+                <a href="#" className="btn btn-lg btn-outline-primary m-2">
+                    Buy VIP
+                </a>
+            </div>
+        </div>
+        <div className="card col-6" >
+            <div className="card-body">
+                <h2 className="card-title">Regular ticket</h2>
+                <p className="card-text">Attend all the talks, expo, workshops and official parties. Ticket includes food and drinks during the events and a dope swag.</p>
+                <h4>$100</h4>
+                <a href="#" className="btn btn-lg btn-outline-primary m-2">
+                    Buy regular
+                </a>
+            </div>
+        </div>
+        </div>
+
+
+      </div>
+      
+      
+     </section>
+
     </>
   );
 }
