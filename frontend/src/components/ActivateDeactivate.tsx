@@ -46,18 +46,12 @@ const StyledActivateDeactivateDiv = styled.div`
 `;
 
 const StyledActivateButton = styled.button`
-  width: 150px;
-  height: 2rem;
-  border-radius: 1rem;
+
   border-color: green;
   cursor: pointer;
 `;
 
 const StyledDeactivateButton = styled.button`
-  width: 150px;
-  height: 2rem;
-  border-radius: 1rem;
-  border-color: red;
   cursor: pointer;
 `;
 
@@ -92,9 +86,11 @@ function Activate(): ReactElement {
       disabled={active}
       style={{
         cursor: active ? 'not-allowed' : 'pointer',
-        borderColor: activating ? 'orange' : active ? 'unset' : 'green'
+        borderColor: activating ? 'orange' : active ? 'gray' : 'blue',
+        color: activating ? 'orange' : active ? 'gray' : 'blue',
       }}
       onClick={handleActivate}
+      className="btn btn-lg btn-outline-primary m-2"
     >
       Connect
     </StyledActivateButton>
@@ -116,9 +112,11 @@ function Deactivate(): ReactElement {
       disabled={!active}
       style={{
         cursor: active ? 'pointer' : 'not-allowed',
-        borderColor: active ? 'red' : 'unset'
+        borderColor: active ? 'blue' : 'gray',
+        color:  active ? 'blue' : 'gray',
       }}
       onClick={handleDeactivate}
+      className="btn btn-lg btn-outline-primary m-2"
     >
       Disconnect
     </StyledDeactivateButton>
