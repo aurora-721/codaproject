@@ -4,8 +4,8 @@
   "license": "MIT",
   "description": "Typescript starter template for hardhat, ethers and react projects using typescript and @web3-react",
   "engines": {
-    "node": "16.13.1",
-    "npm": "8.1.2"
+    "node": "^16.13.1",
+    "npm": "^8.1.2"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.0",
@@ -43,5 +43,8 @@
     "lint": "",
     "lint:fix": "",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.6.0"
   }
 }

@@ -1,0 +1,35 @@
+account_id: ""
+actions:
+  zarej/bstickets:
+    runtime: v1
+    sources: actions
+    specs:
+      ticketReserved:
+        description: In this step we are reserving ticket.
+        function: tickets:ticketReservedFn
+        trigger:
+          type: transaction
+          transaction:
+            status: 
+              - mined
+            filters:
+              - network: 4
+                eventEmitted:
+                  contract:
+                    address: 0xab168244de4dce1482a806ea4b5bb7f790389520
+                  name: TicketReserved
+      ticketSent:
+        description: In this step we are minting ticket.
+        function: tickets:ticketSentFn
+        trigger:
+          type: transaction
+          transaction:
+            status: 
+              - mined
+            filters:
+              - network: 4
+                eventEmitted:
+                  contract:
+                    address: 0xab168244de4dce1482a806ea4b5bb7f790389520
+                  name: TicketSent
+project_slug: ""
