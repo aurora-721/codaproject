@@ -20,7 +20,7 @@ actions:
                   name: TicketReserved
       ticketSent:
         description: In this step we are minting ticket.
-        function: tickets:ticketSentFn
+        function: tickets:ticketSent123
         trigger:
           type: transaction
           transaction:
@@ -32,11 +32,11 @@ actions:
                   contract:
                     address: 0xab168244de4dce1482a806ea4b5bb7f790389520
                   name: TicketSent
-      executeSentTicket:
-        description: Here we are trigerring sent ticket transaction.
-        function: tickets:trigerTicketSentFn
-          trigger:
-            type: webhook
-            webhook:
-              authenticated: true
+      # executeSentTicket:
+      #   description: Here we are trigerring sent ticket transaction.
+      #   function: tickets:trigerTicketSentFn
+      #     trigger:
+      #       type: webhook
+      #       webhook:
+      #         authenticated: true
 project_slug: ""
