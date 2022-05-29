@@ -11,7 +11,7 @@ export const Jumbotron = () => {
         don't simply skip over it entirely.
        </p>
        <p>
-        <a href="#" className="btn btn-lg btn-outline-primary m-2">
+        <a href="/jumno" className="btn btn-lg btn-outline-primary m-2">
          Buy ticket
         </a>
        </p>
